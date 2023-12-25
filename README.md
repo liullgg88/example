@@ -15,7 +15,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/c8147/examples.git
+git remote add origin https://codehub.devcloud.cn-east-3.huaweicloud.com/lm_hwy.lll00001/examples.git
 git branch -M main
 git push -uf origin main
 ```
