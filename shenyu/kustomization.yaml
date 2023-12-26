@@ -4,12 +4,9 @@ commonLabels:
   app: shenyu-bootstrap
 resources:
 - shenyu-bootstrap.yaml
-- shenyu-cm.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
   newTag: 2.6.0-202312261105
-namespace: devops
-websocket:
-- neme: ws://shenyu-bootstrap-svc.${namespace}.svc.cluster.local:9195
+namespace: default
