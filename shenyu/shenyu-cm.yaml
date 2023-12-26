@@ -201,8 +201,8 @@ data:
         maxSize : 10
       sync:
         websocket:
-          urls: ws://shenyu-admin-svc.shenyu.svc.cluster.local:9095/websocket
-          allowOrigin: ws://shenyu-bootstrap-svc.shenyu.svc.cluster.local:9195
+          urls: ws://${shenyu-admin-svc}.${admin-namespace}.svc.cluster.local:9095/websocket
+          allowOrigin: ws://${shenyu-bootstrap-svc}.${bootstrap-namespace}.svc.cluster.local:9195
       exclude:
         enabled: false
         paths:
