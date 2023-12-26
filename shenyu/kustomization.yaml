@@ -4,6 +4,7 @@ commonLabels:
   app: shenyu-bootstrap
 resources:
 - shenyu-bootstrap.yaml
+- shenyu-cm.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
