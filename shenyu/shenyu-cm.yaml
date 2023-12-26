@@ -83,19 +83,24 @@ data:
 #         org.apache.shenyu.bonuspoint: info
 #         org.apache.shenyu.lottery: info
 #         org.apache.shenyu: info
-  shenyu-admin-application-mysql.yml: |
-    shenyu:
-      database:
-        dialect: mysql
-        init_script: "sql-script/mysql/schema.sql"
-        init_enable: true
-    spring:
-      datasource:
-        url: jdbc:mysql://{your_mysql_ip}:{your_mysql_port}/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false
-        username: {your_mysql_user}
-        password: {your_mysql_password}
-        driver-class-name: com.mysql.jdbc.Driver
+#   shenyu-admin-application-mysql.yml: |
+#     shenyu:
+#       database:
+#         dialect: mysql
+#         init_script: "sql-script/mysql/schema.sql"
+#         init_enable: true
+#     spring:
+#       datasource:
+#         url: jdbc:mysql://{your_mysql_ip}:{your_mysql_port}/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#         username: {your_mysql_user}
+#         password: {your_mysql_password}
+#         driver-class-name: com.mysql.jdbc.Driver
   shenyu-bootstrap-application.yml: |
+    PROFILE: production
+    EARTH_SIGN_SECRET: c33f8956507a6e594c35e1cde0f486e7694896f6b92a479269acd81b205c0671
+    BUSINESS_REDIS_HOST: redis-9fa8537a-65e8-4005-af9d-285313e7efae.cn-east-3.dcs.myhuaweicloud.com
+    BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
+    BUSINESS_REDIS_DATABASE: 66
     server:
       port: 9195
       address: 0.0.0.0
