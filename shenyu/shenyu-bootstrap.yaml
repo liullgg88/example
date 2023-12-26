@@ -1,0 +1,51 @@
+# 示例使用 nodeport 方式暴露端口
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap-svc
+spec:
+  selector:
+    app: shenyu-bootstrap
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 9195
+    targetPort: 9195
+    nodePort: 31195
+---
+# shenyu-bootstrap
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap
+spec:
+  selector:
+    matchLabels:
+      app: shenyu-bootstrap
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shenyu-bootstrap
+    spec:
+      volumes:
+      - name: shenyu-bootstrap-application
+        configMap:
+          name: shenyu-cm
+          items:
+          - key: shenyu-bootstrap-application.yml
+            path: shenyu-bootstrap-application.yml
+      containers:
+      - name: shenyu-bootstrap
+        image: apache/shenyu-bootstrap:latest
+        ports:
+        - containerPort: 9195
+        env:
+        - name: TZ
+          value: Asia/Beijing
+        volumeMounts:
+        - name: shenyu-bootstrap-application
+          mountPath: /opt/shenyu-bootstrap/conf/application.yml
+          subPath: shenyu-bootstrap-application.yml
