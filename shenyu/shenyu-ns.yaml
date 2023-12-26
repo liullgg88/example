@@ -1,11 +1,4 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: shenyu
-  labels:
-    name: shenyu
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: shenyu-cm
