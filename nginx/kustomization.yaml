@@ -1,7 +1,7 @@
  Example configuration for the webserver
 # at https://github.com/monopole/hello
 commonLabels:
-  app: rollouts-simple-java
+  app: nginx
 
 resources:
 - Deployment.yaml
@@ -9,6 +9,6 @@ resources:
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- name: registry.cn-hangzhou.aliyuncs.com/rookieops/myapp
+- name: nginx
   newTag: "latest"
-namespace: dev
+namespace: default
