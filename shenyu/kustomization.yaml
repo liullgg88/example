@@ -9,4 +9,4 @@ kind: Kustomization
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
   newTag: 2.6.0-202312261708
-namespace: default
+namespace: hwtest-node-dx
