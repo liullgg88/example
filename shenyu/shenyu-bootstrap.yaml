@@ -40,13 +40,13 @@ spec:
         image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-202312261723
         imagePullPolicy: IfNotPresent
         name: shenyu-bootstrap
-        resources:
-          limits:
-            cpu: "2"
-            memory: 1Gi
-          requests:
-            cpu: "2"
-            memory: 1Gi
+        # resources:
+        #   limits:
+        #     cpu: "2"
+        #     memory: 1Gi
+        #   requests:
+        #     cpu: "2"
+        #     memory: 1Gi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
