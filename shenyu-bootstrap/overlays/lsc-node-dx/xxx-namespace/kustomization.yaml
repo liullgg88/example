@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+- name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
+  newTag: 2.6.0-20231228192318
+namespace: xxx-namespace
+patches:
+  - path: map.yaml
