@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap
+spec:
+  selector:
+    matchLabels:
+      app: shenyu-bootstrap
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shenyu-bootstrap
+    spec:
+      volumes:
+      - name: shenyu-bootstrap-application
+        configMap:
+          name: shenyu-cm
+          items:
+          - key: shenyu-bootstrap-application.yml
+            path: shenyu-bootstrap-application.yml
+
+      imagePullSecrets:
+      - name: default-secret
+      containers:
+      - name: shenyu-bootstrap
+        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:xxxx
+        ports:
+        - containerPort: 9195
+        env:
+        - name: TZ
+          value: Asia/Beijing
+        volumeMounts:
+        - name: shenyu-bootstrap-application
+          mountPath: /opt/shenyu-bootstrap/conf/application.yml
+          subPath: shenyu-bootstrap-application.yml

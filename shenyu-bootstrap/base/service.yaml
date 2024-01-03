@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap-svc
+spec:
+  selector:
+    app: shenyu-bootstrap
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 9195
+    targetPort: 9195
