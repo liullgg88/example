@@ -28,6 +28,13 @@ spec:
         image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap:xxxx
         ports:
         - containerPort: 9195
+        resources:
+          limits:
+            cpu: "8"
+            memory: 4Gi
+          requests:
+            cpu: "4"
+            memory: 2Gi
         env:
         - name: TZ
           value: Asia/Beijing
