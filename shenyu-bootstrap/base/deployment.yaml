@@ -25,7 +25,7 @@ spec:
       - name: default-secret
       containers:
       - name: shenyu-bootstrap
-        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:xxxx
+        image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap:xxxx
         ports:
         - containerPort: 9195
         env:
