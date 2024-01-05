@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 images:
-- name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
+- name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
   newTag: 2.6.0-20240103113952
 namespace: hxf-node-dx
 patches:
