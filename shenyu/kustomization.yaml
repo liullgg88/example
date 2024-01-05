@@ -8,5 +8,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
-  newTag: 2.6.0-20240105092904
+  newTag: 2.6.0-20240105100414
 namespace: hwtest-node-dx
