@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+- name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-id-server
+  newTag: 0.0.1-202312201519
+namespace: shenyu-new
+patches:
+  - path: map.yaml
+

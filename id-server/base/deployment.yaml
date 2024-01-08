@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-server-production
+  namespace: shenyu-new
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: id-server-production
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        redeploy-timestamp: "1703057193628"
+      creationTimestamp: null
+      labels:
+        app: id-server-production
+    spec:
+      containers:
+      - env:
+        - name: APOLLO_ACCESS_KEY_SECRET
+          value: f734962c37c248f6bd4f8494006b6a33
+        envFrom:
+        - configMapRef:
+            name: share-apollo-config
+        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-id-server:0.0.1-202312201519
+        imagePullPolicy: IfNotPresent
+        name: id-server-production
+        ports:
+        - containerPort: 10000
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /id-server/echo
+            port: 10000
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: 500m
+            memory: 2Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: default-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
