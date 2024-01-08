@@ -4,7 +4,8 @@ VERSION=$2
 for i in `ls`
 do
   echo $i
-if [ -d  $i ];then
+if [ -d  $i ]
+  then
    cd /home/jenkins/examples/shenyu-bootstrap/overlays/$i
    /usr/local/bin/kustomize edit set image ${DOCKER_REGISTRY}:${VERSION}
 fi
