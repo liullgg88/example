@@ -1,6 +1,6 @@
 #!/bin/bash
-$1=DOCKER_REGISTRY
-$2=VERSION
+DOCKER_REGISTRY=$1
+VERSION=$2
 for i in `ls`
 do
 if [-d $i];then
