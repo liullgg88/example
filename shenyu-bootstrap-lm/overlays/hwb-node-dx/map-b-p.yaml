@@ -134,7 +134,7 @@ data:
       sync:
         websocket:
           urls: ws://shenyu-admin-svc.shenyu-new.svc.cluster.local:9096/websocket
-          allowOrigin: ws://shenyu-bootstrap-b-p-svc.xxx-namespace.svc.cluster.local:9196
+          allowOrigin: ws://shenyu-bootstrap-b-p-svc.hwb-node-dx.svc.cluster.local:9196
       exclude:
         enabled: false
         paths:

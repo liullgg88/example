@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+images:
+- name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
+  newTag: 20240105-1.0.1
+namespace: hwb-node-dx
+patches:
+- path: map-b-p.yaml
+- path: map-c.yaml

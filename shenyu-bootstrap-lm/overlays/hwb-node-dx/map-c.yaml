@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: shenyu-cm-b-p
+  name: shenyu-cm-c
 data:
   shenyu-bootstrap-application.yml: |
     PROFILE: production
@@ -10,7 +10,7 @@ data:
     BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
     BUSINESS_REDIS_DATABASE: 66
     server:
-      port: 9196
+      port: 9195
       address: 0.0.0.0
     spring:
       main:
@@ -134,7 +134,7 @@ data:
       sync:
         websocket:
           urls: ws://shenyu-admin-svc.shenyu-new.svc.cluster.local:9096/websocket
-          allowOrigin: ws://shenyu-bootstrap-b-p-svc.xxx-namespace.svc.cluster.local:9196
+          allowOrigin: ws://shenyu-bootstrap-c-svc.hwb-node-dx.svc.cluster.local:9195
       exclude:
         enabled: false
         paths:
