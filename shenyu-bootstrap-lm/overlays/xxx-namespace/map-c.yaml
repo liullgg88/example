@@ -1,0 +1,181 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shenyu-cm-c
+data:
+  shenyu-bootstrap-application.yml: |
+    PROFILE: production
+    EARTH_SIGN_SECRET: c33f8956507a6e594c35e1cde0f486e7694896f6b92a479269acd81b205c0671
+    BUSINESS_REDIS_HOST: redis-9fa8537a-65e8-4005-af9d-285313e7efae.cn-east-3.dcs.myhuaweicloud.com
+    BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
+    BUSINESS_REDIS_DATABASE: 66
+    server:
+      port: 9195
+      address: 0.0.0.0
+    spring:
+      main:
+        allow-bean-definition-overriding: true
+        allow-circular-references: true
+      application:
+        name: shenyu-bootstrap
+      codec:
+        max-in-memory-size: 10MB
+      cloud:
+        discovery:
+          enabled: false
+        nacos:
+          discovery:
+            server-addr: 127.0.0.1:8848 # Spring Cloud Alibaba Dubbo use this.
+            enabled: false
+            namespace: ShenyuRegisterCenter
+    eureka:
+      client:
+        enabled: false
+        serviceUrl:
+          defaultZone: http://localhost:8761/eureka/
+      instance:
+        prefer-ip-address: true
+    management:
+      health:
+        defaults:
+          enabled: false
+    shenyu:
+      duplicate-response-header:
+        strategy: RETAIN_FIRST
+        headers:
+          - Access-Control-Allow-Origin
+          - Access-Control-Allow-Methods
+      matchCache:
+        selector:
+          selectorEnabled: false
+          initialCapacity: 10000 # initial capacity in cache
+          maximumSize: 10000 # max size in cache
+        rule:
+          initialCapacity: 10000 # initial capacity in cache
+          maximumSize: 10000 # max size in cache
+      trie:
+        childrenSize: 10000
+        pathVariableSize: 1000
+        pathRuleCacheSize: 1000
+        matchMode: antPathMatch
+      netty:
+        http:
+          # set to false, user can custom the netty tcp server config.
+          webServerFactoryEnabled: true
+          selectCount: 1
+          workerCount: 4
+          accessLog: false
+          serverSocketChannel:
+            soRcvBuf: 87380
+            soBackLog: 128
+            soReuseAddr: false
+            connectTimeoutMillis: 10000
+            writeBufferHighWaterMark: 65536
+            writeBufferLowWaterMark: 32768
+            writeSpinCount: 16
+            autoRead: false
+            allocType: "pooled"
+            messageSizeEstimator: 8
+            singleEventExecutorPerGroup: true
+          socketChannel:
+            soKeepAlive: false
+            soReuseAddr: false
+            soLinger: -1
+            tcpNoDelay: true
+            soRcvBuf: 87380
+            soSndBuf: 16384
+            ipTos: 0
+            allowHalfClosure: false
+            connectTimeoutMillis: 10000
+            writeBufferHighWaterMark: 65536
+            writeBufferLowWaterMark: 32768
+            writeSpinCount: 16
+            autoRead: false
+            allocType: "pooled"
+            messageSizeEstimator: 8
+            singleEventExecutorPerGroup: true
+      instance:
+        enabled: false
+        registerType: zookeeper #etcd #consul
+        serverLists: localhost:2181 #http://localhost:2379 #localhost:8848
+        props:
+      httpclient:
+        strategy: netty
+        responseTimeout: 180000
+        readerIdleTime: 18000
+        writerIdleTime: 18000
+        allIdleTime: 18000
+        readTimeout: 18000
+        writeTimeout: 18000
+        ssl:
+          useInsecureTrustManager: true
+      cross:
+        enabled: true
+        allowedHeaders: "*"
+        allowedMethods: "*"
+        allowedAnyOrigin: true # the same of Access-Control-Allow-Origin: "*"
+        allowedExpose: ""
+        maxAge: "18000"
+        allowCredentials: true
+      switchConfig:
+        local: true
+      file:
+        enabled: true
+        maxSize : 1024
+      sync:
+        websocket:
+          urls: ws://shenyu-admin-svc.shenyu-new.svc.cluster.local:9096/websocket
+          allowOrigin: ws://shenyu-bootstrap-c-svc.xxx-namespace.svc.cluster.local:9195
+      exclude:
+        enabled: false
+        paths:
+          - /favicon.ico
+      fallback:
+        enabled: false
+        paths:
+          - /fallback/hystrix
+          - /fallback/resilience4j
+      health:
+        enabled: false
+        paths:
+          - /actuator/health
+          - /health_check
+      extPlugin:
+        path:
+        enabled: true
+        threads: 1
+        scheduleTime: 300
+        scheduleDelay: 30
+      scheduler:
+        enabled: false
+        type: fixed
+        threads: 16
+      upstreamCheck:
+        enabled: false
+        timeout: 3000
+        healthyThreshold: 1
+        unhealthyThreshold: 1
+        interval: 5000
+        printEnabled: true
+        printInterval: 60000
+      ribbon:
+        serverListRefreshInterval: 10000
+      metrics:
+        enabled: true
+        name : prometheus
+        port: 8090
+        jmxConfig:
+        props:
+          jvm_enabled: true
+      local:
+        enabled: false
+        sha512Key: "BA3253876AED6BC22D4A6FF53D8406C6AD864195ED144AB5C87621B6C233B548BAEAE6956DF346EC8C17F5EA10F35EE3CBC514797ED7DDD3145464E2A0BAB413"
+    logging:
+      level:
+        root: info
+        org.springframework.boot: info
+        org.apache.ibatis: info
+        org.apache.shenyu.bonuspoint: info
+        org.apache.shenyu.lottery: info
+        org.apache.shenyu: info
+

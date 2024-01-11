@@ -1,0 +1,149 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap-c
+spec:
+  selector:
+    matchLabels:
+      app: shenyu-bootstrap-c
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shenyu-bootstrap-c
+    spec:
+      volumes:
+      - name: shenyu-bootstrap-application
+        configMap:
+          name: shenyu-cm-c
+          items:
+          - key: shenyu-bootstrap-application.yml
+            path: shenyu-bootstrap-application.yml
+
+      imagePullSecrets:
+      - name: default-secret
+      containers:
+      - name: shenyu-bootstrap-c
+        image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap:xxxx
+        ports:
+        - containerPort: 9195
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /actuator/health
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 11
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "8"
+            memory: 4Gi
+          requests:
+            cpu: "4"
+            memory: 2Gi
+        env:
+        - name: TZ
+          value: Asia/Beijing
+        volumeMounts:
+        - name: shenyu-bootstrap-application
+          mountPath: /opt/shenyu-bootstrap/conf/application.yml
+          subPath: shenyu-bootstrap-application.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shenyu
+  name: shenyu-bootstrap-b-p
+spec:
+  selector:
+    matchLabels:
+      app: shenyu-bootstrap-b-p
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shenyu-bootstrap-b-p
+    spec:
+      volumes:
+      - name: shenyu-bootstrap-application
+        configMap:
+          name: shenyu-cm-b-p
+          items:
+          - key: shenyu-bootstrap-application.yml
+            path: shenyu-bootstrap-application.yml
+
+      imagePullSecrets:
+      - name: default-secret
+      containers:
+      - name: shenyu-bootstrap-b-p
+        image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap:xxxx
+        ports:
+        - containerPort: 9196
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /actuator/health
+            port: 9196
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9196
+            scheme: HTTP
+          initialDelaySeconds: 11
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9196
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "8"
+            memory: 4Gi
+          requests:
+            cpu: "4"
+            memory: 2Gi
+        env:
+        - name: TZ
+          value: Asia/Beijing
+        volumeMounts:
+        - name: shenyu-bootstrap-application
+          mountPath: /opt/shenyu-bootstrap/conf/application.yml
+          subPath: shenyu-bootstrap-application.yml
