@@ -67,7 +67,7 @@ spec:
             memory: 2Gi
         env:
         - name: TZ
-          value: Asia/Beijing
+          value: Asia/Shanghai
         volumeMounts:
         - name: shenyu-bootstrap-application
           mountPath: /opt/shenyu-bootstrap/conf/application.yml
@@ -142,7 +142,7 @@ spec:
             memory: 2Gi
         env:
         - name: TZ
-          value: Asia/Beijing
+          value: Asia/Shanghai
         volumeMounts:
         - name: shenyu-bootstrap-application
           mountPath: /opt/shenyu-bootstrap/conf/application.yml
