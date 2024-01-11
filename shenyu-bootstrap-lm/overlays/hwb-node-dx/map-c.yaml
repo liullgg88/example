@@ -140,12 +140,12 @@ data:
         paths:
           - /favicon.ico
       fallback:
-        enabled: false
+        enabled: true
         paths:
           - /fallback/hystrix
           - /fallback/resilience4j
       health:
-        enabled: false
+        enabled: true
         paths:
           - /actuator/health
           - /health_check
