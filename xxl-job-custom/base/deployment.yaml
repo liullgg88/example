@@ -19,40 +19,18 @@ spec:
   template:
     metadata:
       annotations:
-        redeploy-timestamp: "1704806783931"
+        redeploy-timestamp: "1704935508665"
       creationTimestamp: null
       labels:
         app: xxl-job-admin
         version: v1
     spec:
       containers:
-      - env:
-        - name: PAAS_APP_NAME
-          value: xxl-job-admin
-        - name: PAAS_NAMESPACE
-          value: xxl-job
-        - name: PAAS_PROJECT_ID
-          value: 0cca93a109800f442ffec00cba0f5e6f
-        - name: XXL_JOB_DB_URL
-          value: jdbc:mysql://mysql-xxljob-stateful.xxl-job.svc.cluster.local:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-        - name: XXL_JOB_ACCESS_TOKEN
-          value: "20231116"
-        - name: XXL_JOB_DB_USERNAME
-          value: root
-        - name: XXL_JOB_DB_PASSWORD
-          value: "123456"
-        - name: XXL_JOB_LOG_DAYS
-          value: "1"
-        - name: CORE_CALLBACK_THREAD
-          value: "50"
-        - name: CORE_FIX_DELAY_THREAD
-          value: "20"
-        - name: SCHEDULE_BATCH_SIZE
-          value: "15"
-        - name: CORE_TRIGGER_THREAD
-          value: "400"
-        image: swr.cn-east-3.myhuaweicloud.com/lemon-develop/xxljob_admin:2.1.1
-        imagePullPolicy: Always
+      - envFrom:
+        - configMapRef:
+            name: xxl-job-admin
+        image: swr.cn-east-3.myhuaweicloud.com/lemon-develop/xxljob_admin:v20240110215418
+        imagePullPolicy: IfNotPresent
         name: xxl-job-admin
         readinessProbe:
           failureThreshold: 3
