@@ -45,19 +45,28 @@ data:
         headers:
           - Access-Control-Allow-Origin
           - Access-Control-Allow-Methods
-      matchCache:
-        selector:
-          selectorEnabled: false
+      selectorMatchCache:
+        ## selector L1 cache
+        cache:
+          enabled: false
           initialCapacity: 10000 # initial capacity in cache
           maximumSize: 10000 # max size in cache
-        rule:
+        ## selector L2 cache, use trie as L2 cache
+        trie:
+          enabled: false
+          cacheSize: 128 # the number of plug-ins
+          matchMode: antPathMatch
+      ruleMatchCache:
+        ## rule L1 cache
+        cache:
+          enabled: true
           initialCapacity: 10000 # initial capacity in cache
-          maximumSize: 10000 # max size in cache
-      trie:
-        childrenSize: 10000
-        pathVariableSize: 1000
-        pathRuleCacheSize: 1000
-        matchMode: antPathMatch
+          maximumSize: 65536 # max size in cache
+        ## rule L2 cache, use trie as L2 cache
+        trie:
+          enabled: false
+          cacheSize: 1024 # the number of selectors
+          matchMode: antPathMatch
       netty:
         http:
           # set to false, user can custom the netty tcp server config.
@@ -131,12 +140,12 @@ data:
         paths:
           - /favicon.ico
       fallback:
-        enabled: false
+        enabled: true
         paths:
           - /fallback/hystrix
           - /fallback/resilience4j
       health:
-        enabled: false
+        enabled: true
         paths:
           - /actuator/health
           - /health_check
