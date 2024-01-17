@@ -35,7 +35,7 @@ spec:
         - name: TZ
           value: Asia/Shanghai
         - name: JAVA_TOOL_OPTIONS
-          value: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=60.204.222.179:11800
+          value: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=124.70.142.83:11800
             -Dskywalking.agent.service_name=le-cce-turbo-test::shenyu-bootstrap
         image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-202312261723
         imagePullPolicy: IfNotPresent
