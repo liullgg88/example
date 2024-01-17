@@ -4,13 +4,6 @@ metadata:
   name: id-server-production-svc
   namespace: shenyu-new
 spec:
-  clusterIP: 10.247.35.34
-  clusterIPs:
-  - 10.247.35.34
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - name: cce-service-0
     port: 80
@@ -18,7 +11,4 @@ spec:
     targetPort: 10000
   selector:
     app: id-server-production
-  sessionAffinity: None
   type: ClusterIP
-status:
-  loadBalancer: {}
