@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-id-server
-  newTag: 0.0.1-202401171517
+  newTag: 0.0.1-202401171545
 namespace: hwtest-node-dx
 patches:
 - path: map.yaml
