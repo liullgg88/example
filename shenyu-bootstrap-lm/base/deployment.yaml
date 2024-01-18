@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   namespace: shenyu
   name: shenyu-bootstrap-c
+  labels:
+    shenyulog: lts
 spec:
   selector:
     matchLabels:
