@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+  name: mini-pay-test
+  namespace: hwtest-node-dx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mini-pay-test
+      version: v1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        redeploy-timestamp: "1703304476241"
+      creationTimestamp: null
+      labels:
+        app: mini-pay-test
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: PAAS_APP_NAME
+          value: mini-pay-test
+        - name: PAAS_NAMESPACE
+          value: hwtest-node-dx
+        - name: PAAS_PROJECT_ID
+          value: 0cca93a109800f442ffec00cba0f5e6f
+        - name: JAVA_TOOL_OPTIONS
+          value: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=60.204.222.179:11800
+            -Dskywalking.agent.service_name=le-cce-turbo-test::mini-pay-test
+        envFrom:
+        - configMapRef:
+            name: apollo-public
+        - configMapRef:
+            name: hwtest-minipay-config
+        image: swr.cn-east-3.myhuaweicloud.com/lemon-develop/allpay:v20240122152109
+        imagePullPolicy: IfNotPresent
+        name: mini-pay-test
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /skywalking
+          name: vol-170245928246544920
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: regsecret-123
+      - name: regsecret
+      - name: default-secret
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - cp -R /skywalking/agent /agent/
+        image: apache/skywalking-java-agent:9.0.0-alpine
+        imagePullPolicy: IfNotPresent
+        name: init-skywalking
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /agent
+          name: vol-170245928246544920
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: vol-170245928246544920
