@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/lemon-develop/xxljob_admin
-  newTag: v20240116213241
+  newTag: v20240122115135
 namespace: xxl-job
 patches:
 - path: map.yaml
