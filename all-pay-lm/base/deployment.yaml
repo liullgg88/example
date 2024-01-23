@@ -38,7 +38,7 @@ spec:
         envFrom:
         - configMapRef:
             name: minipay-share-config
-        image: registry.cn-hangzhou.aliyuncs.com/cn-nhsoft/allpay:202401161650
+        image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/allpay:202401161650
         imagePullPolicy: IfNotPresent
         name: minipay-share
         resources:
