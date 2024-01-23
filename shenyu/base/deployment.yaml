@@ -1,44 +1,140 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: shenyu
+  annotations:
+  labels:
+    app: shenyu-bootstrap
+    app.kubernetes.io/instance: shenyu
   name: shenyu-bootstrap
+  namespace: hwtest-node-dx
 spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: shenyu-bootstrap
-  replicas: 1
+      version: v1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
+      annotations:
+        redeploy-timestamp: "1706003178893"
+      creationTimestamp: null
       labels:
         app: shenyu-bootstrap
+        version: v1
     spec:
-      volumes:
-      - name: shenyu-bootstrap-application
-        configMap:
-          name: apollo-public
-          items:
-          - key: shenyu-bootstrap-application.yml
-            path: shenyu-bootstrap-application.yml
-
-      imagePullSecrets:
-      - name: default-secret
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - 10.16.100.91
       containers:
-      - name: shenyu-bootstrap
-        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-20240123101413
-        ports:
-        - containerPort: 9195
-        resources:
-          limits:
-            cpu: "8"
-            memory: 4Gi
-          requests:
-            cpu: "4"
-            memory: 2Gi
-        env:
+      - env:
+        - name: PAAS_APP_NAME
+          value: shenyu-bootstrap
+        - name: PAAS_NAMESPACE
+          value: hwtest-node-dx
+        - name: PAAS_PROJECT_ID
+          value: 0cca93a109800f442ffec00cba0f5e6f
         - name: TZ
           value: Asia/Shanghai
+        - name: JAVA_TOOL_OPTIONS
+          value: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=124.70.142.83:11800
+            -Dskywalking.agent.service_name=le-cce-turbo-test::shenyu-bootstrap
+        envFrom:
+        - configMapRef:
+            name: apollo-public
+        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-20240123170656
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 40
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: shenyu-bootstrap
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 21
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: "1"
+            memory: 1Gi
+        startupProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: 9195
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
         volumeMounts:
-        - name: shenyu-bootstrap-application
-          mountPath: /opt/shenyu-bootstrap/conf/application.yml
-          subPath: shenyu-bootstrap-application.yml
+        - mountPath: /skywalking
+          name: vol-170261004216661234
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: default-secret
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - cp -R /skywalking/agent /agent/
+        image: apache/skywalking-java-agent:9.0.0-alpine
+        imagePullPolicy: IfNotPresent
+        name: init-skywalking
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /agent
+          name: vol-170261004216661234
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoExecute
+        key: node.kubernetes.io/not-ready
+        operator: Exists
+        tolerationSeconds: 300
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 300
+      volumes:
+      - emptyDir: {}
+        name: vol-170261004216661234
