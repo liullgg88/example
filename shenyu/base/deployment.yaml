@@ -1,133 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-  labels:
-    app: shenyu-bootstrap
-    app.kubernetes.io/instance: shenyu
-    virtual-kubelet.io/provider: huawei
+  namespace: shenyu
   name: shenyu-bootstrap
-  namespace: hwtest-node-dx
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: shenyu-bootstrap
-      version: v1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+  replicas: 1
   template:
     metadata:
-      annotations:
       labels:
         app: shenyu-bootstrap
-        version: v1
     spec:
-      containers:
-      - env:
-        - name: PAAS_APP_NAME
-          value: shenyu-bootstrap
-        - name: PAAS_NAMESPACE
-          value: hwtest-node-dx
-        - name: PAAS_PROJECT_ID
-          value: 0cca93a109800f442ffec00cba0f5e6f
-        - name: TZ
-          value: Asia/Shanghai
-        - name: JAVA_TOOL_OPTIONS
-          value: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=124.70.142.83:11800
-            -Dskywalking.agent.service_name=le-cce-turbo-test::shenyu-bootstrap
-        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-20240123101413
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /actuator
-            port: 9195
-            scheme: HTTP
-          initialDelaySeconds: 40
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: shenyu-bootstrap
-        readinessProbe:
-          failureThreshold: 10
-          httpGet:
-            path: /actuator/health
-            port: 9195
-            scheme: HTTP
-          initialDelaySeconds: 21
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: "2"
-            memory: 2Gi
-          requests:
-            cpu: "1"
-            memory: 1Gi
-        startupProbe:
-          failureThreshold: 10
-          httpGet:
-            path: /actuator/health
-            port: 9195
-            scheme: HTTP
-          initialDelaySeconds: 20
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /opt/shenyu-bootstrap/conf/application.yml
-          name: vol-170254778860414330
-          readOnly: true
-          subPath: shenyu-bootstrap-application.yml
-        - mountPath: /skywalking
-          name: vol-170261004216661234
-      dnsPolicy: ClusterFirst
+      volumes:
+      - name: shenyu-bootstrap-application
+        configMap:
+          name: shenyu-cm
+          items:
+          - key: shenyu-bootstrap-application.yml
+            path: shenyu-bootstrap-application.yml
+
       imagePullSecrets:
       - name: default-secret
-      initContainers:
-      - command:
-        - /bin/sh
-        - -c
-        - cp -R /skywalking/agent /agent/
-        image: apache/skywalking-java-agent:9.0.0-alpine
-        imagePullPolicy: IfNotPresent
-        name: init-skywalking
+      containers:
+      - name: shenyu-bootstrap
+        image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test:2.6.0-20240123101413
+        ports:
+        - containerPort: 9195
         resources:
           limits:
-            cpu: 250m
-            memory: 512Mi
+            cpu: "8"
+            memory: 4Gi
           requests:
-            cpu: 250m
-            memory: 512Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+            cpu: "4"
+            memory: 2Gi
+        env:
+        - name: TZ
+          value: Asia/Beijing
         volumeMounts:
-        - mountPath: /agent
-          name: vol-170261004216661234
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-      tolerations:
-      - effect: NoExecute
-        key: node.kubernetes.io/not-ready
-        operator: Exists
-        tolerationSeconds: 300
-      - effect: NoExecute
-        key: node.kubernetes.io/unreachable
-        operator: Exists
-        tolerationSeconds: 300
-      volumes:
-      - configMap:
-          defaultMode: 420
-          name: apollo-public
-        name: vol-170254778860414330
-      - emptyDir: {}
-        name: vol-170261004216661234
+        - name: shenyu-bootstrap-application
+          mountPath: /opt/shenyu-bootstrap/conf/application.yml
+          subPath: shenyu-bootstrap-application.yml
