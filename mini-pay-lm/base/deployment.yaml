@@ -38,7 +38,7 @@ spec:
         envFrom:
         - configMapRef:
             name: minipay-share-darmon-config
-        image: registry.cn-hangzhou.aliyuncs.com/cn-nhsoft/minipay-daemon:v202401230146
+        image: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/minipay-daemon-boot:xxx
         imagePullPolicy: IfNotPresent
         name: minipay-share-daemon
         resources:
