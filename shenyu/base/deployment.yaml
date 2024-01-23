@@ -83,5 +83,10 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: apollo-public
+        name: vol-170254778860414330
       - emptyDir: {}
         name: vol-170261004216661234
