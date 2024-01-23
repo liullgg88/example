@@ -9,6 +9,9 @@ data:
     BUSINESS_REDIS_HOST: redis-9fa8537a-65e8-4005-af9d-285313e7efae.cn-east-3.dcs.myhuaweicloud.com
     BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
     BUSINESS_REDIS_DATABASE: 66
+    USERCENTER_REDIS_HOST: redis-eabfeef5-8cc3-46c7-b299-f10039942d37.cn-east-3.dcs.myhuaweicloud.com
+    USERCENTER_REDIS_PASSWORD: JurvRKhDcqc8d5QjgRyo
+    EARTH_ENVIRONMENT: WSGL
     server:
       port: 9196
       address: 0.0.0.0
