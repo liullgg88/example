@@ -5,8 +5,6 @@ resources:
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/minipay-daemon-boot
   newTag: 20240120-posfixed
-- name: swr.cn-east-3.myhuaweicloud.com/lemon-develop/minipay-daemon-boot
-  newTag: hwy-20240122
 namespace: minipay-share
 patches:
 - path: map.yaml
