@@ -4,5 +4,5 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/lemon-develop/allpay
-  newTag: v20240122201239
+  newTag: v20240123114449
 namespace: hwtest-node-dx
