@@ -4,5 +4,5 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/lemon-develop/minipay-daemon-boot
-  newTag: v20240122201414
+  newTag: hwy-20240122
 namespace: hwtest-node-dx
