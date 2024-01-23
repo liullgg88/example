@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: minipay-share
+  name: minipay-share-svc
+  namespace: minipay-share
+spec:
+  ports:
+  - name: cce-service-0
+    port: 80
+    protocol: TCP
+    targetPort: 55123
+  - name: cce-service-1
+    port: 18001
+    protocol: TCP
+    targetPort: 55123
+  selector:
+    app: minipay-share
+    version: v1
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

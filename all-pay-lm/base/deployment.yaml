@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+  name: minipay-share
+  namespace: minipay-share
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: minipay-share
+      version: v1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: minipay-share
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: PAAS_APP_NAME
+          value: minipay-share
+        - name: PAAS_NAMESPACE
+          value: minipay-share
+        - name: PAAS_PROJECT_ID
+          value: 0cca93a109800f442ffec00cba0f5e6f
+        - name: PROFILE
+          value: production
+        envFrom:
+        - configMapRef:
+            name: minipay-share-config
+        image: registry.cn-hangzhou.aliyuncs.com/cn-nhsoft/allpay:202401161650
+        imagePullPolicy: IfNotPresent
+        name: minipay-share
+        resources:
+          limits:
+            cpu: "4"
+            memory: 8Gi
+          requests:
+            cpu: "2"
+            memory: 4Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: minipay-regcecret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}

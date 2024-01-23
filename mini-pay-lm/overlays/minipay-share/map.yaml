@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  DATABASE_PASSWORD: HwyLm321!share
+  DATABASE_URL: jdbc:mysql://10.16.9.199:3306/minipay_share?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
+  DATABASE_USERNAME: minipay_share
+  MINIPAY_COLLECTOR_URL: https://minipay.lemeng.center/minipay-collector
+  MINIPAY_URL: https://minipay-hwy.lemeng.center/minipay
+  REDIS_DB: "0"
+  REDIS_HOST: redis-9c581520-9ae0-4975-b379-1bbcf5d1f45d.cn-east-3.dcs.myhuaweicloud.com
+  REDIS_PASSWORD: HwyLm321!share
+  RETENTION_LOG_CONTEXT: "20"
+  RETENTION_PAY_LOG_HISTORY: "18"
+  STORAGE_AK: 4Y5BM7MV7XTQEXDH3CND
+  STORAGE_BUCKET: minipay-share
+  STORAGE_ENDPOINT: obs.cn-east-3.myhuaweicloud.com
+  STORAGE_SK: tEzg6BNSkgKcbEBbN2ZgBtT7el0ArSM90AgH58Em
+  STORAGE_TYPE: HW
+  TENANT_ENVIRONMENT: production-hw-share
+kind: ConfigMap
+metadata:
+  annotations:
+  name: minipay-share-darmon-config
