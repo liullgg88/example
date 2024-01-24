@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xxl-job-admin-config
+data:
+  APOLLO_CACHE_DIR: /opt/data
+  APOLLO_CONFIG_SERVICE: http://apollo-config-hwy.lemeng.center:8080
+  ENV: HWY
+  IDC: SHARE
