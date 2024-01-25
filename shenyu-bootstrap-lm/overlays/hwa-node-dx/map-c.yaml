@@ -9,6 +9,9 @@ data:
     BUSINESS_REDIS_HOST: redis-9fa8537a-65e8-4005-af9d-285313e7efae.cn-east-3.dcs.myhuaweicloud.com
     BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
     BUSINESS_REDIS_DATABASE: 66
+    USERCENTER_REDIS_HOST: redis-7d809033-1a97-4c42-a9e6-1c9cb19d5ad9.cn-east-3.dcs.myhuaweicloud.com
+    USERCENTER_REDIS_PASSWORD: s0VlUJls5dhaN#ye
+    EARTH_ENVIRONMENT: HWA
     server:
       port: 9195
       address: 0.0.0.0
