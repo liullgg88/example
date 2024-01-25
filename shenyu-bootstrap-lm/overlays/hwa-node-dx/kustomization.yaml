@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
-  newTag: 20240105-1.0.1
+  newTag: 20240125-B-fixed
 namespace: hwa-node-dx
 patches:
 - path: map-b-p.yaml
