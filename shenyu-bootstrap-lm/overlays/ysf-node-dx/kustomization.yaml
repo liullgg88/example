@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
-  newTag: 20240120-posfixed
+  newTag: 20240125-B-fixed
 namespace: ysf-node-dx
 patches:
 - path: map-b-p.yaml
