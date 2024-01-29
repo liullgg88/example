@@ -9,6 +9,9 @@ data:
     BUSINESS_REDIS_HOST: redis-9fa8537a-65e8-4005-af9d-285313e7efae.cn-east-3.dcs.myhuaweicloud.com
     BUSINESS_REDIS_PASSWORD: CFCoD2UCDE5Ws1z
     BUSINESS_REDIS_DATABASE: 66
+    USERCENTER_REDIS_HOST: redis-71bff476-fa67-40e6-a1b4-748ef0a44646.cn-east-3.dcs.myhuaweicloud.com
+    USERCENTER_REDIS_PASSWORD: ZXEnZXnkzayGLi8
+    EARTH_ENVIRONMENT: YSF
     server:
       port: 9196
       address: 0.0.0.0
