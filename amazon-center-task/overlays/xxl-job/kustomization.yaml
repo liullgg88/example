@@ -4,5 +4,5 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/lemon-develop/amazon-center-task
-  newTag: v20240131111920
+  newTag: v20240131112736
 namespace: xxl-job
