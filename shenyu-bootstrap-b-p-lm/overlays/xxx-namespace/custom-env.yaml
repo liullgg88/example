@@ -9,4 +9,4 @@ spec:
         - name: shenyu-bootstrap-b-p
           envFrom:
             - configMapRef:
-                name: hwc-apollo-config
+                name: xxx-apollo-config
