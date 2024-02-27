@@ -62,3 +62,5 @@ spec:
         env:
         - name: TZ
           value: Asia/Shanghai
+        - name: APOLLO_ACCESS_KEY_SECRET
+          value: f6c1d17db3b84075992545cca4712592
