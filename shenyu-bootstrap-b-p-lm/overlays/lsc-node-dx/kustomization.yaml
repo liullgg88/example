@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
-  newTag: 20240227-B-fixed
+  newTag: 20240229-B-fixed
 namespace: lsc-node-dx
 patches:
 - path: custom-env.yaml
