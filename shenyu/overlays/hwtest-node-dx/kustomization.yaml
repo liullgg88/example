@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
-  newTag: 2.6.0-20240226163854
+  newTag: 2.6.0-20240229164025
 namespace: hwtest-node-dx
 patches:
 - path: map.yaml
