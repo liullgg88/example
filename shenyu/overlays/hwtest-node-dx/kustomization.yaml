@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 images:
+- {}
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-shenyu-bootstrap-test
   newTag: 2.6.0-20240301161807
 namespace: hwtest-node-dx
