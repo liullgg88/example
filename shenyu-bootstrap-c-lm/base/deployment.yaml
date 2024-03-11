@@ -54,10 +54,9 @@ spec:
           timeoutSeconds: 1
         resources:
           limits:
-            cpu: "8"
             memory: 4Gi
           requests:
-            cpu: "4"
+            cpu: "1"
             memory: 2Gi
         env:
         - name: TZ
