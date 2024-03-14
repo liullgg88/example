@@ -8,5 +8,5 @@ patches:
     kind: Deployment
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
-  newTag: 20240305_fixed
+  newTag: 20240313_C_fixed
 namespace: kxnc-node-dx
