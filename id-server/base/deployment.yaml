@@ -29,7 +29,7 @@ spec:
           value: f734962c37c248f6bd4f8494006b6a33
         envFrom:
         - configMapRef:
-            name: share-apollo-config
+            name: apollo-public
         image: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-id-server:0.0.1-202312201519
         imagePullPolicy: IfNotPresent
         name: id-server-production
