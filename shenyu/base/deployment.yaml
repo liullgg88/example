@@ -29,15 +29,6 @@ spec:
         app: shenyu-bootstrap
         version: v1
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - 10.16.100.91
       containers:
       - env:
         - name: PAAS_APP_NAME
