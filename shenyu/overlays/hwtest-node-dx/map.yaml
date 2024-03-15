@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   APOLLO_CACHE_DIR: /opt/data
-  APOLLO_CONFIG_SERVICE: http://124.70.142.83:8080
+  APOLLO_CONFIG_SERVICE: http://apollo-configservice.hwtest-apollo.svc.cluster.local:8080
   APOLLO_PROPERTY_NAMES_CACHE_ENABLE: "true"
   ENV: DEV
   IDC: HWY
