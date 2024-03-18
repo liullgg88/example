@@ -4,7 +4,7 @@ resources:
 - ../../base
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/hwy-test/my-id-server
-  newTag: 20240318_fixed
+  newTag: 20240318_1_fixed
 namespace: shenyu-new
 patches:
 - path: map.yaml
