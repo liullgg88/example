@@ -8,5 +8,5 @@ patches:
     kind: Deployment
 images:
 - name: swr.cn-east-3.myhuaweicloud.com/cn-nhsoft/shenyu-bootstrap
-  newTag: 20240320_logconsole
+  newTag: 20240321_2_P_fixed
 namespace: hwb-node-dx
